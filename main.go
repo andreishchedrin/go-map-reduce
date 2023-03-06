@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"sync"
+	"time"
 )
 
 const file = "Fifa22.csv"
@@ -29,6 +30,7 @@ type Stats struct {
 }
 
 func main() {
+	start := time.Now()
 	f, err := os.Open(file)
 	if err != nil {
 		panic(err)
@@ -60,7 +62,9 @@ func main() {
 	close(lists)
 
 	final := <-result
+	fmt.Println(time.Since(start))
 	fmt.Println(final[1])
+	fmt.Println(len(final))
 }
 
 func Map(player []string) []Player {
